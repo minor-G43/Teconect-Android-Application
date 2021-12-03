@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Teconnect</string>
+    <string name="note">"We'll call or text you to confirm your number. Standard message and data rates apply."</string>
+    <string name="Continue">"Continue"</string>
+    <string name="Login_page_heading">"Register to Teconect"</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="Login_page_heading_2">Confirm your number</string>
+    <string name="note_2">"Enter the code we've sent by SMS to your given number."</string>
+    <string name="new_here_create_an_account">New here? Create an account</string>
+</resources>
