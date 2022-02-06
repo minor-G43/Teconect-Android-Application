@@ -17,6 +17,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 
 import okhttp3.OkHttpClient;
@@ -36,6 +42,9 @@ public class ProjectsFragment extends Fragment {
     private Retrofit retrofit;
     private Context mycontext;
     ProgressBar progressBar;
+    private String id;
+    private connect_list  note;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Nullable
     @Override
@@ -55,7 +64,7 @@ public class ProjectsFragment extends Fragment {
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient okHttpClient=new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build();
         retrofit= new Retrofit.Builder().baseUrl("https://tconectapi.herokuapp.com/api/").addConverterFactory(GsonConverterFactory.create()).client(okHttpClient).build();
-        initViews();
+        getid();
 
 
         return v;
@@ -92,7 +101,7 @@ public class ProjectsFragment extends Fragment {
                if(response.isSuccessful())
                {
                    ArrayList<project_list> list=response.body().getData();
-                   RecyclerAdapter recyclerAdapter = new RecyclerAdapter(getContext(),list);
+                   RecyclerAdapter recyclerAdapter = new RecyclerAdapter(getContext(),list,note,id);
                    recyclerView.setAdapter(recyclerAdapter);
                }
             }
@@ -104,6 +113,66 @@ public class ProjectsFragment extends Fragment {
         });
 
 
+    }
+
+    private void fetch_data_from_firestore()
+    {
+
+        /*db.collection("619f6de399616854dd6224a5").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(@NotNull QuerySnapshot queryDocumentSnapshots) {
+
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            note = documentSnapshot.toObject(connect_list.class);
+                            print();
+                        }
+                    }
+                });*/
+
+        db.collection(id).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task)
+            {
+
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        note=document.toObject(connect_list.class);
+                        initViews();
+                    }
+                }
+                else {
+
+                }
+            }
+        });
+    }
+
+    private void getid()
+    {
+        String user_token = getToken();
+        group43 g43=retrofit.create(group43.class);
+        Call<profile_response> Profile_Response=g43.getProfile(user_token);
+        Profile_Response.enqueue(new Callback<profile_response>() {
+            @Override
+            public void onResponse(Call<profile_response> call, Response<profile_response> response)
+            {
+                if(response.isSuccessful())
+                {
+                    id=response.body().getData().get_id();
+                    fetch_data_from_firestore();
+                }
+                else
+                {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<profile_response> call, Throwable t) {
+
+            }
+        });
     }
 
     private String getToken()

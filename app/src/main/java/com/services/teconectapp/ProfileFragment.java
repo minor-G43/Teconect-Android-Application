@@ -90,7 +90,7 @@ public class ProfileFragment extends Fragment {
         super.onAttach(context);
         mycontext=context;
     }
-//ok
+
     public void receiveMsg()
     {
         HttpLoggingInterceptor httpLoggingInterceptor=new HttpLoggingInterceptor();
