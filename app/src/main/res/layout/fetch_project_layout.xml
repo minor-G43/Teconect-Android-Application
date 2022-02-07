@@ -60,10 +60,13 @@
 
             <Button
                 android:id="@+id/fetch_project_connect"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:textColor="#FFF"
                 android:backgroundTint="#77dd77"
                 android:text="connect"
@@ -71,11 +74,14 @@
 
             <Button
                 android:id="@+id/accept_project_user_button"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:text="Accept Project Owner Request"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Accept Request"
                 android:textColor="#FFF"
                 android:backgroundTint="#ff6961"
                 android:textAllCaps="false"
@@ -83,22 +89,28 @@
 
             <Button
                 android:id="@+id/pending_project_user_button"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:text="Already Request Sended (Pending)"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Request Pending"
                 android:textColor="#FFF"
                 android:textAllCaps="false"
                 android:visibility="gone"/>
 
             <Button
                 android:id="@+id/redirect_to_whatsapp_project_user_button"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:text="Redirect to Whatsapp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Message"
                 android:textColor="#FFF"
                 android:backgroundTint="#77dd77"
                 android:visibility="gone"/>
